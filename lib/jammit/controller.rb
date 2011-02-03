@@ -66,8 +66,8 @@ module Jammit
     # Extracts the package name, extension (:css, :js), and variant (:datauri,
     # :mhtml) from the incoming URL.
     def parse_request
-      pack       = params[:package]
-      @extension = params[:extension].to_sym
+      pack       = request.path_parameters[:package]
+      @extension = request.path_parameters[:extension].to_sym
       raise PackageNotFound unless (VALID_FORMATS + [Jammit.template_extension.to_sym]).include?(@extension)
       if Jammit.embed_assets
         suffix_match = pack.match(SUFFIX_STRIPPER)
